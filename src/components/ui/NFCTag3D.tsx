@@ -1,7 +1,14 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { MeshStandardMaterial } from 'three'
+import { Howl } from 'howler'
 import * as THREE from 'three'
+
+// Short 50ms tick sound encoded inline (sine wave blip)
+const tapSound = new Howl({
+  src: ['data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqPkZOUlZWUk5GOi4eFgn57eHZ0cnBvbm5ub3BxcnR2eHt+gYSHioyOkJGSkpGQj42LiIaEgX97eXd1c3JxcHBwcXJzdXd5e36AhIeKjI6QkZKSkZCPjYuIhoN/fXp4dXRycXBwcHFycnR2eHt+gISHio2PkJGRkZCPjYuJhoN/fHp4dXNycXBwcHFyc3V3eXt+gIOHio2OkJGRkZCPjYuJhYJ/fHp3dXNycXBwcHFyc3V3eXx+gIOHioyOkJCRkZCPjYqIhYJ/fHp3dXNxcHBwcHBxc3V3eXx+g4eKjI+QkZGQj42LiIWCf3x6d3VycXBwcHBxc3R2eXt+g4aKjI+QkZGQj42LiIaDefx6d3VycXBwcHBxc3R2eXt9gIaJjI+QkZGQj42LiIaDefx6d3VycXBwcHBxc3R2eXt9gIaJjI+QkZGQj42LiIaDfXt5d3VycXBwcHBxc3R2eXx+gYaJjI+QkZGQj42LiIaDfXt4dnRycXBwcHBxc3R2eXx+gYaJjI+QkZCPjoyKiIaDfXt4dnRycXBwcHBxc3R2eXx+gYaJjI+QkZCPjoyKiIaDfXt4dnRycXBwcHBxc3R2eHt9gIWJjI6QkJCPjYuJiIWCfXt4dnRycXBwcA=='],
+  volume: 0.3,
+  html5: false,
+})
 
 interface TagMeshProps {
   mouseX: number
@@ -48,7 +55,7 @@ function TagMesh({ mouseX, mouseY }: TagMeshProps) {
   return (
     <group ref={groupRef}>
       <mesh
-        onPointerEnter={() => setHovered(true)}
+        onPointerEnter={() => { setHovered(true); tapSound.play() }}
         onPointerLeave={() => setHovered(false)}
         castShadow
       >
