@@ -116,3 +116,4 @@ export default function PhoneScreen({ step }: PhoneScreenProps) {
     </div>
   )
 }
+
