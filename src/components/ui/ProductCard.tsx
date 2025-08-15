@@ -93,3 +93,4 @@ export default function ProductCard({ product }: ProductCardProps) {
 }
 
 export type { Product }
+
