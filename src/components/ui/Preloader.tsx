@@ -48,3 +48,4 @@ export default function Preloader({ visible }: PreloaderProps) {
     </AnimatePresence>
   )
 }
+
