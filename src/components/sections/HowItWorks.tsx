@@ -34,23 +34,24 @@ export default function HowItWorks() {
   const stepProgress = (progress * 3) % 1
 
   return (
-    <section
-      ref={ref}
-      id="how-it-works"
-      style={{ height: '300vh' }}
-    >
+    <section ref={ref} id="how-it-works" style={{ height: '300vh' }}>
       <div
         className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden"
-        style={{ background: '#050505' }}
+        style={{ background: 'var(--c-bg)' }}
       >
         {/* ambient */}
-        <div className="absolute top-1/3 left-0 w-80 h-80 pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(138,43,226,0.08), transparent 70%)', filter: 'blur(80px)' }} />
+        <div
+          className="absolute top-1/3 left-0 w-80 h-80 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(138,43,226,0.08), transparent 70%)', filter: 'blur(80px)' }}
+        />
 
         {/* header */}
         <div className="text-center mb-10 px-6">
           <p className="font-body text-xs text-secondary/70 uppercase tracking-widest mb-2">How It Works</p>
-          <h2 className="font-display font-bold text-white" style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>
+          <h2
+            className="font-display font-bold"
+            style={{ fontSize: 'clamp(28px, 4vw, 48px)', color: 'var(--c-text)' }}
+          >
             Your world, automated
           </h2>
         </div>
@@ -61,9 +62,9 @@ export default function HowItWorks() {
             <div key={i} className="flex items-center gap-2">
               <div
                 className="w-2 h-2 rounded-full transition-all duration-500"
-                style={{ background: i === step ? s.color : 'rgba(255,255,255,0.15)', transform: i === step ? 'scale(1.5)' : 'scale(1)' }}
+                style={{ background: i === step ? s.color : 'rgba(128,128,128,0.2)', transform: i === step ? 'scale(1.5)' : 'scale(1)' }}
               />
-              {i < steps.length - 1 && <div className="w-8 h-px bg-white/10" />}
+              {i < steps.length - 1 && <div className="w-8 h-px" style={{ background: 'var(--c-border)' }} />}
             </div>
           ))}
         </div>
@@ -88,13 +89,15 @@ export default function HowItWorks() {
                   {steps[step].icon}
                 </div>
                 <div>
-                  <div className="font-body text-xs text-white/40 uppercase tracking-wider">{steps[step].label}</div>
-                  <div className="font-display font-semibold text-white text-sm mt-0.5">NFC Tag</div>
+                  <div className="font-body text-xs uppercase tracking-wider" style={{ color: 'var(--c-text-40)' }}>
+                    {steps[step].label}
+                  </div>
+                  <div className="font-display font-semibold text-sm mt-0.5" style={{ color: 'var(--c-text)' }}>NFC Tag</div>
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            {/* SVG wave line to phone */}
+            {/* SVG wave line */}
             <div className="hidden lg:block w-full">
               <svg viewBox="0 0 300 60" className="w-full" style={{ overflow: 'visible' }}>
                 <motion.path
@@ -121,24 +124,24 @@ export default function HowItWorks() {
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
                 <h3
-                  className="font-display font-bold text-white mb-2"
-                  style={{ fontSize: 'clamp(18px, 2.5vw, 28px)' }}
+                  className="font-display font-bold mb-2"
+                  style={{ fontSize: 'clamp(18px, 2.5vw, 28px)', color: 'var(--c-text)' }}
                 >
                   {steps[step].title}
                 </h3>
-                <p className="font-body text-white/50 text-sm leading-relaxed">
+                <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--c-text-50)' }}>
                   {steps[step].description}
                 </p>
               </motion.div>
             </AnimatePresence>
 
-            {/* progress bar */}
-            <div className="w-full h-px bg-white/10 rounded-full overflow-hidden">
+            {/* progress bar — fixed: uses raw progress (0→1) */}
+            <div className="w-full h-px rounded-full overflow-hidden" style={{ background: 'var(--c-border)' }}>
               <motion.div
                 className="h-full rounded-full"
                 style={{ background: steps[step].color }}
                 initial={{ width: '0%' }}
-                animate={{ width: `${((step + stepProgress) / 3) * 100}%` }}
+                animate={{ width: `${Math.min(progress * 100, 100)}%` }}
                 transition={{ duration: 0.1 }}
               />
             </div>
@@ -161,8 +164,3 @@ export default function HowItWorks() {
     </section>
   )
 }
-
-
-
-
-
