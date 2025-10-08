@@ -38,18 +38,17 @@ export default function BentoCard({ icon, title, description, className = '', ac
 
       {/* accent border glow */}
       {accent && (
-        <div className="absolute inset-0 rounded-card pointer-events-none"
-          style={{ boxShadow: 'inset 0 0 0 1px rgba(138,43,226,0.3)' }} />
+        <div
+          className="absolute inset-0 rounded-card pointer-events-none"
+          style={{ boxShadow: 'inset 0 0 0 1px rgba(138,43,226,0.3)' }}
+        />
       )}
 
       <div className="relative z-10">
         <div className="text-3xl mb-3">{icon}</div>
-        <h3 className="font-display font-semibold text-white text-lg mb-1">{title}</h3>
-        <p className="font-body text-white/50 text-sm leading-relaxed">{description}</p>
+        <h3 className="font-display font-semibold text-lg mb-1" style={{ color: 'var(--c-text)' }}>{title}</h3>
+        <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--c-text-50)' }}>{description}</p>
       </div>
     </div>
   )
 }
-
-
-
