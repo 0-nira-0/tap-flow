@@ -1,6 +1,6 @@
-import { Suspense, lazy } from 'react'
+// import { Suspense, lazy } from 'react'
 
-const NFCTag3D = lazy(() => import('../ui/NFCTag3D'))
+// const NFCTag3D = lazy(() => import('../ui/NFCTag3D'))
 
 function NFCTagFallback() {
   return (
@@ -94,12 +94,15 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* 3D canvas */}
+        {/* 3D canvas — temporarily disabled */}
         <div className="lg:w-2/5 w-full h-80 lg:h-[500px] relative">
           <div className="hidden md:block w-full h-full">
+            {/* 3D disabled:
             <Suspense fallback={<NFCTagFallback />}>
               <NFCTag3D />
             </Suspense>
+            */}
+            <NFCTagFallback />
           </div>
           <div className="block md:hidden">
             <MobileTagSVG />
