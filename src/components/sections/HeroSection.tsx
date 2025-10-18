@@ -92,7 +92,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* 3D canvas — temporarily disabled */}
+        {/* 3D canvas, temporarily disabled */}
         <div className="lg:w-2/5 w-full h-80 lg:h-[500px] relative">
           <div className="hidden md:block w-full h-full">
             {/* 3D disabled:

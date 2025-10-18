@@ -34,13 +34,13 @@ function CardMesh({ mouseX, mouseY }: CardMeshProps) {
         />
       </mesh>
 
-      {/* Card edge highlight — top */}
+      {/* Card edge highlight, top */}
       <mesh position={[0, 1.01, 0]}>
         <boxGeometry args={[3.2, 0.01, 0.06]} />
         <meshStandardMaterial color="#8A2BE2" emissive="#8A2BE2" emissiveIntensity={0.6} metalness={1} roughness={0} />
       </mesh>
 
-      {/* Card edge highlight — bottom */}
+      {/* Card edge highlight, bottom */}
       <mesh position={[0, -1.01, 0]}>
         <boxGeometry args={[3.2, 0.01, 0.06]} />
         <meshStandardMaterial color="#8A2BE2" emissive="#8A2BE2" emissiveIntensity={0.3} metalness={1} roughness={0} />
@@ -58,19 +58,19 @@ function CardMesh({ mouseX, mouseY }: CardMeshProps) {
         <meshStandardMaterial color="#d4a83a" metalness={1} roughness={0.02} />
       </mesh>
 
-      {/* NFC antenna ring — outer */}
+      {/* NFC antenna ring, outer */}
       <mesh position={[0.6, 0, 0.032]}>
         <torusGeometry args={[0.55, 0.012, 8, 48]} />
         <meshStandardMaterial color="#8A2BE2" emissive="#8A2BE2" emissiveIntensity={0.7} metalness={0.8} roughness={0.1} />
       </mesh>
 
-      {/* NFC antenna ring — mid */}
+      {/* NFC antenna ring, mid */}
       <mesh position={[0.6, 0, 0.032]}>
         <torusGeometry args={[0.36, 0.009, 8, 48]} />
         <meshStandardMaterial color="#00FFFF" emissive="#00FFFF" emissiveIntensity={0.5} metalness={0.8} roughness={0.1} />
       </mesh>
 
-      {/* NFC antenna ring — inner */}
+      {/* NFC antenna ring, inner */}
       <mesh position={[0.6, 0, 0.032]}>
         <torusGeometry args={[0.18, 0.008, 8, 32]} />
         <meshStandardMaterial color="#8A2BE2" emissive="#8A2BE2" emissiveIntensity={0.5} metalness={0.8} roughness={0.1} />

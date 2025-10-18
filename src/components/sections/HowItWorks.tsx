@@ -107,7 +107,7 @@ export default function HowItWorks() {
 
           {/* main content */}
           <div className="w-full max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 lg:gap-20">
-            {/* left — tag + text */}
+            {/* left: tag + text */}
             <div className="flex-1 flex flex-col items-start gap-4 sm:gap-6 w-full max-w-sm">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -171,7 +171,7 @@ export default function HowItWorks() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* progress bar — fixed: uses raw progress (0→1) */}
+              {/* progress bar uses raw progress (0 to 1) */}
               <div className="w-full h-px rounded-full overflow-hidden" style={{ background: 'var(--c-border)' }}>
                 <motion.div
                   className="h-full rounded-full"
@@ -183,7 +183,7 @@ export default function HowItWorks() {
               </div>
             </div>
 
-            {/* right — phone */}
+            {/* right: phone */}
             <div
               ref={slotRef}
               className="relative flex-shrink-0"

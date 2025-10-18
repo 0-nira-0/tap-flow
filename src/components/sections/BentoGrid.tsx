@@ -1,7 +1,7 @@
 import BentoCard from '../ui/BentoCard'
 
 const cards = [
-  { id: 'bg',    icon: '⚡', title: 'Works in background', description: 'Launches automations instantly — no app open needed. Tap and go.', big: true,  accent: true  },
+  { id: 'bg',    icon: '⚡', title: 'Works in background', description: 'Launches automations instantly, no app open needed. Tap and go.', big: true,  accent: true  },
   { id: 'tap',   icon: '👆', title: '1 tap = 7 actions',   description: 'Single touch triggers music, maps, smart lights, calendar, and more simultaneously.', big: true,  accent: false },
   { id: 'sec',   icon: '🔒', title: 'Secure',              description: 'End-to-end encrypted. Your automations are yours alone.', big: false, accent: false },
   { id: 'home',  icon: '🏠', title: 'Smart home',          description: 'HomeKit and Google Home integration out of the box.', big: false, accent: false },

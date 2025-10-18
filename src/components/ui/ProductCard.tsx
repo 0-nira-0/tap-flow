@@ -23,7 +23,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* layer 3 — base chip */}
+      {/* layer 3: base chip */}
       <div
         className="absolute inset-0 rounded-card"
         style={{
@@ -34,7 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         }}
       />
 
-      {/* layer 2 — antenna pattern */}
+      {/* layer 2: antenna pattern */}
       <div
         className="absolute inset-2 rounded-card overflow-hidden"
         style={{
@@ -50,7 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </svg>
       </div>
 
-      {/* layer 1 — decorative surface */}
+      {/* layer 1: decorative surface */}
       <div
         className="relative p-5 flex flex-col gap-4"
         style={{
