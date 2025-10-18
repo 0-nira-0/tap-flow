@@ -7,26 +7,45 @@ import BentoGrid from './components/sections/BentoGrid'
 import ShopCarousel from './components/sections/ShopCarousel'
 import Footer from './components/sections/Footer'
 
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-3 h-3" fill="currentColor" aria-hidden>
+      <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z" />
+    </svg>
+  )
+}
+
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden>
+      <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </svg>
+  )
+}
+
 function ThemeToggle({ isDark, onToggle }: { isDark: boolean; onToggle: () => void }) {
   return (
     <button
       onClick={onToggle}
-      aria-label="Toggle theme"
-      className="relative w-12 h-6 rounded-full transition-all duration-300 flex-shrink-0"
+      aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+      className="relative w-12 h-6 rounded-full transition-colors duration-300 flex-shrink-0"
       style={{
         background: isDark ? 'rgba(138,43,226,0.3)' : 'rgba(138,43,226,0.15)',
         border: '1px solid rgba(138,43,226,0.4)',
       }}
     >
+      {/* 18px knob in a 46x22 track: 2px gap on every side */}
       <span
-        className="absolute top-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] transition-all duration-300"
+        className="absolute top-0.5 left-0.5 w-[18px] h-[18px] rounded-full flex items-center justify-center transition-all duration-300"
         style={{
-          left: isDark ? '2px' : '22px',
-          background: isDark ? '#8A2BE2' : '#f2f2f5',
+          transform: isDark ? 'translateX(0)' : 'translateX(24px)',
+          background: isDark ? '#8A2BE2' : '#ffffff',
+          color: isDark ? '#ffffff' : '#8A2BE2',
           boxShadow: isDark ? '0 0 8px rgba(138,43,226,0.6)' : '0 1px 4px rgba(0,0,0,0.15)',
         }}
       >
-        {isDark ? '🌙' : '☀️'}
+        {isDark ? <MoonIcon /> : <SunIcon />}
       </span>
     </button>
   )
