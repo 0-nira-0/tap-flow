@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useScrollProgress } from '../../hooks/useScrollProgress'
 import PhoneScreen from '../ui/PhoneScreen'
@@ -31,7 +30,6 @@ export default function HowItWorks() {
   const { ref, progress } = useScrollProgress()
 
   const step = Math.min(2, Math.floor(progress * 3))
-  const stepProgress = (progress * 3) % 1
 
   return (
     <section ref={ref} id="how-it-works" style={{ height: '300vh' }}>
