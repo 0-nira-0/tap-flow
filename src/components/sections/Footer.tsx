@@ -1,5 +1,11 @@
 import { motion } from 'framer-motion'
 import { QRCodeSVG } from 'qrcode.react'
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from '../../links'
+
+const stores: [string, string][] = [
+  ['iOS', APP_STORE_URL],
+  ['Android', GOOGLE_PLAY_URL],
+]
 
 const navLinks: [string, string][] = [
   ['Features', '#features'],
@@ -57,23 +63,29 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <button
-            className="font-body font-medium px-8 py-4 rounded border border-primary transition-all duration-300 hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(138,43,226,0.4)]"
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body font-medium text-center px-8 py-4 rounded border border-primary transition-all duration-300 hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(138,43,226,0.4)]"
             style={{ color: 'var(--c-text)' }}
           >
             Download for iOS
-          </button>
-          <button
-            className="font-body font-medium px-8 py-4 rounded border border-white/20 transition-all duration-300 hover:border-secondary/60 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)]"
+          </a>
+          <a
+            href={GOOGLE_PLAY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body font-medium text-center px-8 py-4 rounded border border-white/20 transition-all duration-300 hover:border-secondary/60 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)]"
             style={{ color: 'var(--c-text-70)' }}
           >
             Download for Android
-          </button>
+          </a>
         </motion.div>
 
-        {/* QR Code — no hover effects */}
+        {/* QR codes, no hover effects; hidden on phones where there is nothing to scan with */}
         <motion.div
-          className="relative z-10 flex flex-col items-center gap-3"
+          className="relative z-10 hidden sm:flex flex-col items-center gap-3"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -82,14 +94,21 @@ export default function Footer() {
           <p className="font-body text-xs uppercase tracking-widest" style={{ color: 'var(--c-text-30)' }}>
             Scan to download
           </p>
-          <div className="p-3 rounded-lg glass" style={{ color: 'var(--c-text)' }}>
-            <QRCodeSVG
-              value="https://tapflow.app/download"
-              size={160}
-              fgColor="currentColor"
-              bgColor="transparent"
-              level="M"
-            />
+          <div className="flex gap-6">
+            {stores.map(([label, url]) => (
+              <div key={label} className="flex flex-col items-center gap-2">
+                <div className="p-3 rounded-lg glass" style={{ color: 'var(--c-text)' }}>
+                  <QRCodeSVG
+                    value={url}
+                    size={128}
+                    fgColor="currentColor"
+                    bgColor="transparent"
+                    level="M"
+                  />
+                </div>
+                <span className="font-body text-xs" style={{ color: 'var(--c-text-40)' }}>{label}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

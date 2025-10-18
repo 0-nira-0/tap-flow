@@ -1,4 +1,5 @@
 // import { Suspense, lazy } from 'react'
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from '../../links'
 
 // const NFCTag3D = lazy(() => import('../ui/NFCTag3D'))
 
@@ -70,18 +71,24 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <button
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-body font-medium px-6 py-3 rounded border border-primary transition-all duration-300 hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(138,43,226,0.4)]"
               style={{ color: 'var(--c-text)' }}
             >
               ⬇ Download for iOS
-            </button>
-            <button
+            </a>
+            <a
+              href={GOOGLE_PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-body font-medium px-6 py-3 rounded border border-white/20 transition-all duration-300 hover:border-primary/60 hover:bg-primary/5"
               style={{ color: 'var(--c-text-70)' }}
             >
               ⬇ Download for Android
-            </button>
+            </a>
           </div>
 
           <div className="flex items-center gap-6 mt-10">
