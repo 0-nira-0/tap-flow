@@ -90,15 +90,6 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
               ⬇ Download for Android
             </a>
           </div>
-
-          <div className="flex items-center gap-6 mt-10">
-            {[['50K+', 'Downloads'], ['4.9', 'App Store'], ['1M+', 'Taps daily']].map(([val, label]) => (
-              <div key={label}>
-                <div className="font-display font-bold text-xl" style={{ color: 'var(--c-text)' }}>{val}</div>
-                <div className="font-body text-xs" style={{ color: 'var(--c-text-40)' }}>{label}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* 3D canvas — temporarily disabled */}
