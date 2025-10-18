@@ -11,13 +11,10 @@ const navLinks: [string, string][] = [
   ['Features', '#features'],
   ['How it works', '#how-it-works'],
   ['Shop', '#shop'],
-  ['Privacy', '#'],
-  ['Terms', '#'],
 ]
 
 export default function Footer() {
   const scrollTo = (href: string) => {
-    if (href === '#') return
     document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -130,24 +127,11 @@ export default function Footer() {
               </a>
             ))}
           </nav>
-
-          <div className="flex gap-4">
-            {(['𝕏', 'in', 'ig'] as const).map(icon => (
-              <a
-                key={icon}
-                href="#"
-                className="w-8 h-8 rounded glass flex items-center justify-center font-body text-sm transition-all duration-200 hover:border-primary/40"
-                style={{ color: 'var(--c-text-40)' }}
-              >
-                {icon}
-              </a>
-            ))}
-          </div>
         </div>
 
         <div className="max-w-6xl mx-auto mt-6 pt-6 text-center" style={{ borderTop: '1px solid var(--c-border-faint)' }}>
           <p className="font-body text-xs" style={{ color: 'var(--c-text-20)' }}>
-            © 2025 TapFlow. All rights reserved. Built with precision and intent.
+            © {new Date().getFullYear()} TapFlow. All rights reserved.
           </p>
         </div>
       </div>
