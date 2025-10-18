@@ -97,6 +97,7 @@ export default function PhoneScreen({ step }: PhoneScreenProps) {
     <div
       className="relative mx-auto rounded-[32px] border-2 border-white/10 overflow-hidden"
       style={{ width: '240px', aspectRatio: '9/19.5', background: '#0d0d0d' }}
+      data-theme="dark"
     >
       <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-white/10 rounded-full z-10" />
       <div className="absolute inset-x-0 top-6 bottom-0">

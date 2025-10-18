@@ -73,8 +73,7 @@ function Header({ isDark, onToggle }: { isDark: boolean; onToggle: () => void })
           <button
             key={id}
             onClick={() => scrollTo(id)}
-            className="font-body text-sm transition-colors duration-200 hover:text-white"
-            style={{ color: 'var(--c-text-50)' }}
+            className="font-body text-sm transition-colors duration-200 text-[color:var(--c-text-50)] hover:text-[color:var(--c-text)]"
           >
             {label}
           </button>

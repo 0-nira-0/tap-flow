@@ -11,6 +11,7 @@ export default function Preloader({ visible }: PreloaderProps) {
         <motion.div
           className="fixed inset-0 z-50 flex flex-col items-center justify-center"
           style={{ background: '#050505' }}
+          data-theme="dark"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}

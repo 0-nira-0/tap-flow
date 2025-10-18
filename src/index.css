@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 /* ── Theme variables ─────────────────────────────────── */
-:root {
+/* [data-theme="dark"] also marks always-dark areas, e.g. the phone mockup */
+:root,
+[data-theme="dark"] {
   --c-bg:          #050505;
   --c-surface:     rgba(255, 255, 255, 0.03);
   --c-border:      rgba(255, 255, 255, 0.08);
@@ -76,23 +78,24 @@
 }
 
 /* ── Light-theme Tailwind overrides ──────────────────── */
-[data-theme="light"] .text-white           { color: #0a0a0a !important; }
-[data-theme="light"] .text-white\/70       { color: rgba(10,10,10,.70) !important; }
-[data-theme="light"] .text-white\/60       { color: rgba(10,10,10,.60) !important; }
-[data-theme="light"] .text-white\/50       { color: rgba(10,10,10,.50) !important; }
-[data-theme="light"] .text-white\/40       { color: rgba(10,10,10,.40) !important; }
-[data-theme="light"] .text-white\/30       { color: rgba(10,10,10,.30) !important; }
-[data-theme="light"] .text-white\/20       { color: rgba(10,10,10,.20) !important; }
-[data-theme="light"] .text-white\/10       { color: rgba(10,10,10,.10) !important; }
-[data-theme="light"] .text-white\/5        { color: rgba(10,10,10,.05) !important; }
+/* Skipped inside always-dark areas marked with data-theme="dark" */
+[data-theme="light"] .text-white:not([data-theme="dark"] *)           { color: #0a0a0a !important; }
+[data-theme="light"] .text-white\/70:not([data-theme="dark"] *)       { color: rgba(10,10,10,.70) !important; }
+[data-theme="light"] .text-white\/60:not([data-theme="dark"] *)       { color: rgba(10,10,10,.60) !important; }
+[data-theme="light"] .text-white\/50:not([data-theme="dark"] *)       { color: rgba(10,10,10,.50) !important; }
+[data-theme="light"] .text-white\/40:not([data-theme="dark"] *)       { color: rgba(10,10,10,.40) !important; }
+[data-theme="light"] .text-white\/30:not([data-theme="dark"] *)       { color: rgba(10,10,10,.30) !important; }
+[data-theme="light"] .text-white\/20:not([data-theme="dark"] *)       { color: rgba(10,10,10,.20) !important; }
+[data-theme="light"] .text-white\/10:not([data-theme="dark"] *)       { color: rgba(10,10,10,.10) !important; }
+[data-theme="light"] .text-white\/5:not([data-theme="dark"] *)        { color: rgba(10,10,10,.05) !important; }
 
-[data-theme="light"] .bg-white\/5         { background-color: rgba(10,10,10,.05) !important; }
-[data-theme="light"] .bg-white\/10        { background-color: rgba(10,10,10,.10) !important; }
-[data-theme="light"] .bg-white\/20        { background-color: rgba(10,10,10,.20) !important; }
+[data-theme="light"] .bg-white\/5:not([data-theme="dark"] *)         { background-color: rgba(10,10,10,.05) !important; }
+[data-theme="light"] .bg-white\/10:not([data-theme="dark"] *)        { background-color: rgba(10,10,10,.10) !important; }
+[data-theme="light"] .bg-white\/20:not([data-theme="dark"] *)        { background-color: rgba(10,10,10,.20) !important; }
 
-[data-theme="light"] .border-white\/5     { border-color: rgba(10,10,10,.05) !important; }
-[data-theme="light"] .border-white\/10    { border-color: rgba(10,10,10,.10) !important; }
-[data-theme="light"] .border-white\/20    { border-color: rgba(10,10,10,.20) !important; }
+[data-theme="light"] .border-white\/5:not([data-theme="dark"] *)     { border-color: rgba(10,10,10,.05) !important; }
+[data-theme="light"] .border-white\/10:not([data-theme="dark"] *)    { border-color: rgba(10,10,10,.10) !important; }
+[data-theme="light"] .border-white\/20:not([data-theme="dark"] *)    { border-color: rgba(10,10,10,.20) !important; }
 
 /* ── Animations ──────────────────────────────────────── */
 @keyframes glitch {

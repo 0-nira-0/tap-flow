@@ -82,11 +82,11 @@ export default function Footer() {
           <p className="font-body text-xs uppercase tracking-widest" style={{ color: 'var(--c-text-30)' }}>
             Scan to download
           </p>
-          <div className="p-3 rounded-lg glass">
+          <div className="p-3 rounded-lg glass" style={{ color: 'var(--c-text)' }}>
             <QRCodeSVG
               value="https://tapflow.app/download"
               size={160}
-              fgColor="#FFFFFF"
+              fgColor="currentColor"
               bgColor="transparent"
               level="M"
             />
@@ -105,8 +105,7 @@ export default function Footer() {
                 key={label}
                 href={href}
                 onClick={e => { e.preventDefault(); scrollTo(href) }}
-                className="font-body text-sm transition-colors duration-200 hover:text-white"
-                style={{ color: 'var(--c-text-40)' }}
+                className="font-body text-sm transition-colors duration-200 text-[color:var(--c-text-40)] hover:text-[color:var(--c-text)]"
               >
                 {label}
               </a>
