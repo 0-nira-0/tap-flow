@@ -15,7 +15,7 @@ const navLinks: [string, string][] = [
 
 export default function Footer() {
   const scrollTo = (href: string) => {
-    document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(href.replace('#', ''))?.scrollIntoView()
   }
 
   return (

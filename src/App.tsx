@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { LazyMotion, domAnimation } from 'framer-motion'
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion'
 import Preloader from './components/ui/Preloader'
 import HeroSection from './components/sections/HeroSection'
 import HowItWorks from './components/sections/HowItWorks'
@@ -29,7 +29,7 @@ function ThemeToggle({ isDark, onToggle }: { isDark: boolean; onToggle: () => vo
     <button
       onClick={onToggle}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-      className="relative w-12 h-6 rounded-full transition-colors duration-300 flex-shrink-0"
+      className="relative w-12 h-6 rounded-full transition-colors duration-300 flex-shrink-0 before:absolute before:-inset-x-1 before:-inset-y-2.5 before:content-['']"
       style={{
         background: isDark ? 'rgba(138,43,226,0.3)' : 'rgba(138,43,226,0.15)',
         border: '1px solid rgba(138,43,226,0.4)',
@@ -53,7 +53,8 @@ function ThemeToggle({ isDark, onToggle }: { isDark: boolean; onToggle: () => vo
 
 function Header({ isDark, onToggle }: { isDark: boolean; onToggle: () => void }) {
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    // smoothness comes from html { scroll-behavior }, which honours reduced motion
+    document.getElementById(id)?.scrollIntoView()
   }
 
   return (
@@ -109,15 +110,17 @@ export default function App() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Preloader visible={loading} />
-      <Header isDark={isDark} onToggle={() => setIsDark(v => !v)} />
-      <main>
-        <HeroSection isDark={isDark} />
-        <HowItWorks />
-        <BentoGrid />
-        <ShopCarousel />
-        <Footer />
-      </main>
+      <MotionConfig reducedMotion="user">
+        <Preloader visible={loading} />
+        <Header isDark={isDark} onToggle={() => setIsDark(v => !v)} />
+        <main>
+          <HeroSection isDark={isDark} />
+          <HowItWorks />
+          <BentoGrid />
+          <ShopCarousel />
+          <Footer />
+        </main>
+      </MotionConfig>
     </LazyMotion>
   )
 }
