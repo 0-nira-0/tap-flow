@@ -11,10 +11,13 @@ export function useScrollProgress() {
       const rect = el.getBoundingClientRect()
       const sectionTop = window.scrollY + rect.top
       const sectionHeight = el.offsetHeight
-      const windowHeight = window.innerHeight
+      // the sticky frame (first child) is 100svh; window.innerHeight changes
+      // whenever mobile browser bars slide in or out
+      const frame = el.firstElementChild as HTMLElement | null
+      const viewportHeight = frame?.offsetHeight ?? window.innerHeight
 
       const scrolled = window.scrollY - sectionTop
-      const scrollable = sectionHeight - windowHeight
+      const scrollable = sectionHeight - viewportHeight
       const raw = scrolled / scrollable
 
       setProgress(Math.max(0, Math.min(1, raw)))

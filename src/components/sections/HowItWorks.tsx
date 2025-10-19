@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useScrollProgress } from '../../hooks/useScrollProgress'
 import PhoneScreen from '../ui/PhoneScreen'
 
@@ -30,12 +30,16 @@ const steps = [
 const PHONE_W = 240
 const PHONE_H = 520 // 240px wide at 9:19.5
 
-// Shrinks the phone so the whole sticky frame fits short viewports
+// Shrinks the phone so the whole sticky frame fits short viewports.
+// Everything it reads is stable while scrolling: the frame is 100svh, so mobile
+// browser bars do not change it, and the step texts share one grid cell, so the
+// content keeps one height for every step.
 function usePhoneScale() {
   const frameRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const slotRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)
+  const [compact, setCompact] = useState(false)
 
   useLayoutEffect(() => {
     const update = () => {
@@ -43,11 +47,15 @@ function usePhoneScale() {
       const content = contentRef.current
       const slot = slotRef.current
       if (!frame || !content || !slot) return
+      // small phones and landscape phones drop the section title to leave room for the phone
+      setCompact(frame.clientWidth < 768 && frame.clientHeight < 780)
       const cs = getComputedStyle(frame)
       const available = frame.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
       const rest = content.offsetHeight - slot.offsetHeight
-      const next = Math.min(1, Math.max(0.4, (available - rest) / PHONE_H))
-      setScale(prev => (Math.abs(prev - next) < 0.01 ? prev : next))
+      const fit = Math.min(1, Math.max(0.4, (available - rest) / PHONE_H))
+      // 2% steps, so sub-pixel layout noise never nudges the phone
+      const next = Math.floor(fit * 50) / 50
+      setScale(prev => (prev === next ? prev : next))
     }
 
     update()
@@ -57,12 +65,12 @@ function usePhoneScale() {
     return () => observer.disconnect()
   }, [])
 
-  return { frameRef, contentRef, slotRef, scale }
+  return { frameRef, contentRef, slotRef, scale, compact }
 }
 
 export default function HowItWorks() {
   const { ref, progress } = useScrollProgress()
-  const { frameRef, contentRef, slotRef, scale } = usePhoneScale()
+  const { frameRef, contentRef, slotRef, scale, compact } = usePhoneScale()
 
   const step = Math.min(2, Math.floor(progress * 3))
 
@@ -81,8 +89,8 @@ export default function HowItWorks() {
         />
 
         <div ref={contentRef} className="w-full flex flex-col items-center">
-          {/* header: hidden on small phones and landscape phones to leave room for the phone */}
-          <div className="text-center mb-6 sm:mb-10 px-6 [@media(max-width:767px)_and_(max-height:720px)]:hidden">
+          {/* header */}
+          <div className={`text-center mb-6 sm:mb-10 px-6 ${compact ? 'hidden' : ''}`}>
             <p className="font-body text-xs text-secondary/70 uppercase tracking-widest mb-2">How It Works</p>
             <h2
               className="font-display font-bold"
@@ -109,29 +117,33 @@ export default function HowItWorks() {
           <div className="w-full max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 lg:gap-20">
             {/* left: tag + text */}
             <div className="flex-1 flex flex-col items-start gap-4 sm:gap-6 w-full max-w-sm">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={step}
-                  initial={{ x: -80, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: 80, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
-                  className="flex items-center gap-4"
-                >
-                  <div
-                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center text-2xl glass"
-                    style={{ boxShadow: `0 0 20px ${steps[step].color}33` }}
+              {/* every step is rendered in the same grid cell and cross-faded, so
+                  switching steps never changes the height of this column */}
+              <div className="grid w-full">
+                {steps.map((s, i) => (
+                  <motion.div
+                    key={s.label}
+                    aria-hidden={i !== step}
+                    initial={false}
+                    animate={{ x: i === step ? 0 : i < step ? 80 : -80, opacity: i === step ? 1 : 0 }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    className="[grid-area:1/1] flex items-center gap-4"
                   >
-                    {steps[step].icon}
-                  </div>
-                  <div>
-                    <div className="font-body text-xs uppercase tracking-wider" style={{ color: 'var(--c-text-40)' }}>
-                      {steps[step].label}
+                    <div
+                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center text-2xl glass"
+                      style={{ boxShadow: `0 0 20px ${s.color}33` }}
+                    >
+                      {s.icon}
                     </div>
-                    <div className="font-display font-semibold text-sm mt-0.5" style={{ color: 'var(--c-text)' }}>NFC Tag</div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                    <div>
+                      <div className="font-body text-xs uppercase tracking-wider" style={{ color: 'var(--c-text-40)' }}>
+                        {s.label}
+                      </div>
+                      <div className="font-display font-semibold text-sm mt-0.5" style={{ color: 'var(--c-text)' }}>NFC Tag</div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
 
               {/* SVG wave line */}
               <div className="hidden lg:block w-full">
@@ -151,25 +163,28 @@ export default function HowItWorks() {
                 </svg>
               </div>
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`text-${step}`}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                >
-                  <h3
-                    className="font-display font-bold mb-2"
-                    style={{ fontSize: 'clamp(18px, 2.5vw, 28px)', color: 'var(--c-text)' }}
+              <div className="grid w-full">
+                {steps.map((s, i) => (
+                  <motion.div
+                    key={s.label}
+                    aria-hidden={i !== step}
+                    initial={false}
+                    animate={{ y: i === step ? 0 : i < step ? -20 : 20, opacity: i === step ? 1 : 0 }}
+                    transition={{ duration: 0.4, delay: i === step ? 0.1 : 0 }}
+                    className="[grid-area:1/1]"
                   >
-                    {steps[step].title}
-                  </h3>
-                  <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--c-text-50)' }}>
-                    {steps[step].description}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
+                    <h3
+                      className="font-display font-bold mb-2"
+                      style={{ fontSize: 'clamp(18px, 2.5vw, 28px)', color: 'var(--c-text)' }}
+                    >
+                      {s.title}
+                    </h3>
+                    <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--c-text-50)' }}>
+                      {s.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
 
               {/* progress bar uses raw progress (0 to 1) */}
               <div className="w-full h-px rounded-full overflow-hidden" style={{ background: 'var(--c-border)' }}>
