@@ -1,20 +1,13 @@
-// import { Suspense, lazy } from 'react'
+import { Component, Suspense, lazy, type ReactNode } from 'react'
 import ComingSoon from '../ui/ComingSoon'
 
-// const NFCTag3D = lazy(() => import('../ui/NFCTag3D'))
+const TapScene = lazy(() => import('../ui/TapScene'))
 
-function NFCTagFallback() {
+// shown while three.js loads, and instead of the scene when WebGL is missing or fails
+function TagFallback() {
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="w-48 h-48 rounded-full border border-primary/30 animate-pulse-glow" />
-    </div>
-  )
-}
-
-function MobileTagSVG() {
-  return (
-    <div className="flex items-center justify-center w-full h-64">
-      <svg viewBox="0 0 200 200" className="w-48 h-48 animate-float">
+      <svg viewBox="0 0 200 200" className="w-48 h-48 animate-float" aria-hidden>
         <circle cx="100" cy="100" r="90" fill="#3D1070" stroke="#8A2BE2" strokeWidth="2"/>
         <circle cx="100" cy="100" r="60" fill="none" stroke="#00FFFF" strokeWidth="1.5" opacity="0.6"/>
         <circle cx="100" cy="100" r="30" fill="none" stroke="#00FFFF" strokeWidth="1" opacity="0.4"/>
@@ -22,6 +15,27 @@ function MobileTagSVG() {
       </svg>
     </div>
   )
+}
+
+class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false }
+
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+
+  render() {
+    return this.state.failed ? <TagFallback /> : this.props.children
+  }
+}
+
+function hasWebGL() {
+  try {
+    const canvas = document.createElement('canvas')
+    return !!(canvas.getContext('webgl2') || canvas.getContext('webgl'))
+  } catch {
+    return false
+  }
 }
 
 interface HeroSectionProps {
@@ -82,19 +96,17 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* 3D canvas, temporarily disabled */}
-        <div className="lg:w-2/5 w-full h-80 lg:h-[500px] relative">
-          <div className="hidden md:block w-full h-full">
-            {/* 3D disabled:
-            <Suspense fallback={<NFCTagFallback />}>
-              <NFCTag3D />
-            </Suspense>
-            */}
-            <NFCTagFallback />
-          </div>
-          <div className="block md:hidden">
-            <MobileTagSVG />
-          </div>
+        {/* 3D scene: a phone tapping an NFC tag */}
+        <div className="lg:w-[45%] w-full h-80 sm:h-[420px] lg:h-[540px] relative">
+          {hasWebGL() ? (
+            <SceneBoundary>
+              <Suspense fallback={<TagFallback />}>
+                <TapScene />
+              </Suspense>
+            </SceneBoundary>
+          ) : (
+            <TagFallback />
+          )}
         </div>
       </div>
 
