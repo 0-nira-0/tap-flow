@@ -1,9 +1,9 @@
-import { useRef } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { useMouseParallax } from '../../hooks/useMouseParallax'
 import { useCursorSpotlight } from '../../hooks/useCursorSpotlight'
 
 interface BentoCardProps {
-  icon: string
+  icon: ReactNode
   title: string
   description: string
   className?: string
@@ -47,7 +47,12 @@ export default function BentoCard({ icon, title, description, className = '', ac
       )}
 
       <div className="relative z-10">
-        <div className="text-3xl mb-3">{icon}</div>
+        <div
+          className="w-11 h-11 mb-4 rounded-lg flex items-center justify-center"
+          style={{ background: 'rgba(138,43,226,0.12)', color: accent ? '#00FFFF' : '#8A2BE2', boxShadow: 'inset 0 0 0 1px rgba(138,43,226,0.25)' }}
+        >
+          {icon}
+        </div>
         <h3 className="font-display font-semibold text-lg mb-1" style={{ color: 'var(--c-text)' }}>{title}</h3>
         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--c-text-50)' }}>{description}</p>
       </div>

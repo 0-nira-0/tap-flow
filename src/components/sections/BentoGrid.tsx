@@ -1,12 +1,13 @@
 import BentoCard from '../ui/BentoCard'
+import { BoltIcon, HomeIcon, LockIcon, PhoneIcon, TapIcon, UsersIcon } from '../ui/icons'
 
 const cards = [
-  { id: 'bg',    icon: '⚡', title: 'Works in background', description: 'Launches automations instantly, no app open needed. Tap and go.', big: true,  accent: true  },
-  { id: 'tap',   icon: '👆', title: '1 tap = 7 actions',   description: 'Single touch triggers music, maps, smart lights, calendar, and more simultaneously.', big: true,  accent: false },
-  { id: 'sec',   icon: '🔒', title: 'Secure',              description: 'End-to-end encrypted. Your automations are yours alone.', big: false, accent: false },
-  { id: 'home',  icon: '🏠', title: 'Smart home',          description: 'HomeKit and Google Home integration out of the box.', big: false, accent: false },
-  { id: 'guest', icon: '👥', title: 'Guest mode',          description: 'Share Wi-Fi and automations without revealing credentials.', big: false, accent: false },
-  { id: 'cross', icon: '📱', title: 'iOS & Android',       description: 'Native integration on both platforms. One tag, any phone.', big: false, accent: false },
+  { id: 'bg',    icon: <BoltIcon size={22} />,  title: 'Works in background', description: 'Launches automations instantly, no app open needed. Tap and go.', big: true,  accent: true  },
+  { id: 'tap',   icon: <TapIcon size={22} />,   title: '1 tap = 7 actions',   description: 'Single touch triggers music, maps, smart lights, calendar, and more simultaneously.', big: true,  accent: false },
+  { id: 'sec',   icon: <LockIcon size={22} />,  title: 'Secure',              description: 'End-to-end encrypted. Your automations are yours alone.', big: false, accent: false },
+  { id: 'home',  icon: <HomeIcon size={22} />,  title: 'Smart home',          description: 'HomeKit and Google Home integration out of the box.', big: false, accent: false },
+  { id: 'guest', icon: <UsersIcon size={22} />, title: 'Guest mode',          description: 'Share Wi-Fi and automations without revealing credentials.', big: false, accent: false },
+  { id: 'cross', icon: <PhoneIcon size={22} />, title: 'iOS & Android',       description: 'Native integration on both platforms. One tag, any phone.', big: false, accent: false },
 ]
 
 export default function BentoGrid() {

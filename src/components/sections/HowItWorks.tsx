@@ -2,24 +2,25 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useScrollProgress } from '../../hooks/useScrollProgress'
 import PhoneScreen from '../ui/PhoneScreen'
+import { CarIcon, CoffeeIcon, MoonIcon } from '../ui/icons'
 
 const steps = [
   {
-    icon: '☕',
+    Icon: CoffeeIcon,
     label: 'Coffee Tag',
     title: 'One tap for the perfect morning',
     description: 'Tap your coffee mug tag. Spotify starts, lights brighten, and your day begins.',
     color: '#8A2BE2',
   },
   {
-    icon: '🚗',
+    Icon: CarIcon,
     label: 'Car Tag',
     title: 'Get in and go',
     description: 'Touch the dashboard tag. Navigation launches, hands-free activates, playlist resumes.',
     color: '#00FFFF',
   },
   {
-    icon: '🌙',
+    Icon: MoonIcon,
     label: 'Night Tag',
     title: 'Your night ritual in one tap',
     description: 'Tap the bedside tag. Lights off, Do Not Disturb on, alarm set for 7 AM.',
@@ -130,10 +131,10 @@ export default function HowItWorks() {
                     className="[grid-area:1/1] flex items-center gap-4"
                   >
                     <div
-                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center text-2xl glass"
-                      style={{ boxShadow: `0 0 20px ${s.color}33` }}
+                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center glass"
+                      style={{ boxShadow: `0 0 20px ${s.color}33`, color: s.color }}
                     >
-                      {s.icon}
+                      <s.Icon size={26} />
                     </div>
                     <div>
                       <div className="font-body text-xs uppercase tracking-wider" style={{ color: 'var(--c-text-40)' }}>

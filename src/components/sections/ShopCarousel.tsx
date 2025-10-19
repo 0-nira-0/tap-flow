@@ -1,3 +1,5 @@
+import { TagIcon } from '../ui/icons'
+
 export default function ShopCarousel() {
   return (
     <section id="shop" className="py-24 overflow-hidden" style={{ background: 'var(--c-bg)' }}>
@@ -16,10 +18,10 @@ export default function ShopCarousel() {
           style={{ borderColor: 'var(--c-border)', background: 'var(--c-surface)' }}
         >
           <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-2xl"
-            style={{ background: 'rgba(138,43,226,0.12)', boxShadow: '0 0 32px rgba(138,43,226,0.2)' }}
+            className="w-16 h-16 rounded-full flex items-center justify-center"
+            style={{ background: 'rgba(138,43,226,0.12)', boxShadow: '0 0 32px rgba(138,43,226,0.2)', color: '#8A2BE2' }}
           >
-            🏷️
+            <TagIcon size={26} />
           </div>
 
           <h3
