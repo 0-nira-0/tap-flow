@@ -123,6 +123,11 @@
   50%       { transform: translateY(-8px); }
 }
 
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.3); }
+  50%       { transform: scaleY(1); }
+}
+
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.15; }
   50%       { opacity: 0.25; }
