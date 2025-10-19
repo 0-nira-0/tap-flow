@@ -6,6 +6,7 @@ import HowItWorks from './components/sections/HowItWorks'
 import BentoGrid from './components/sections/BentoGrid'
 import ShopCarousel from './components/sections/ShopCarousel'
 import Footer from './components/sections/Footer'
+import ComingSoon from './components/ui/ComingSoon'
 
 function MoonIcon() {
   return (
@@ -83,13 +84,7 @@ function Header({ isDark, onToggle }: { isDark: boolean; onToggle: () => void })
 
       <div className="flex items-center gap-3">
         <ThemeToggle isDark={isDark} onToggle={onToggle} />
-        <button
-          onClick={() => scrollTo('footer')}
-          className="font-body text-sm px-4 py-2 rounded border border-primary/60 transition-all duration-300 hover:bg-primary/10 hover:shadow-glow"
-          style={{ color: 'var(--c-text)' }}
-        >
-          Download
-        </button>
+        <ComingSoon className="hidden sm:inline-flex text-sm px-4 py-2" />
       </div>
     </header>
   )
