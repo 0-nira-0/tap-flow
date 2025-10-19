@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer id="footer" style={{ background: 'var(--c-bg)' }}>
       {/* fullscreen CTA */}
-      <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6">
+      <div className="relative min-h-screen-safe flex flex-col items-center justify-center overflow-hidden px-6">
         {/* big background text */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"

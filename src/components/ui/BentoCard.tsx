@@ -15,12 +15,14 @@ export default function BentoCard({ icon, title, description, className = '', ac
   const { style, handlers: parallaxHandlers } = useMouseParallax(cardRef, 8)
   const { spotStyle, handlers: spotHandlers } = useCursorSpotlight()
 
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  // mouse only: a tap on a touch screen would leave the card tilted with no leave event
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse') return
     parallaxHandlers.onMouseMove(e)
     spotHandlers.onMouseMove(e)
   }
 
-  const onMouseLeave = () => {
+  const onPointerLeave = () => {
     parallaxHandlers.onMouseLeave()
     spotHandlers.onMouseLeave()
   }
@@ -30,8 +32,8 @@ export default function BentoCard({ icon, title, description, className = '', ac
       ref={cardRef}
       className={`relative overflow-hidden rounded-card p-6 glass cursor-default ${className}`}
       style={{ ...style, transition: 'transform 0.1s ease' }}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
     >
       {/* spotlight overlay */}
       <div className="absolute inset-0 pointer-events-none rounded-card" style={spotStyle} />

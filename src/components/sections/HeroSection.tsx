@@ -32,7 +32,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden py-24"
+      className="relative min-h-screen-safe flex items-center overflow-hidden py-24"
       style={{ background: 'var(--c-bg)' }}
     >
       {/* ambient background blobs */}

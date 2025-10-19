@@ -73,10 +73,16 @@
     backdrop-filter: blur(10px);
   }
 
-  /* small viewport height, so mobile browser bars never cover the bottom */
+  /* small viewport height: stable while mobile browser bars slide in and out,
+     and never covered by them */
   .h-screen-safe {
     height: 100vh;
     height: 100svh;
+  }
+
+  .min-h-screen-safe {
+    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .glow-primary  { box-shadow: 0 0 20px rgba(138, 43, 226, 0.4); }
