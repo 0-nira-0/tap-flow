@@ -8,15 +8,15 @@ This repository is the landing page for the product.
 
 ## What is on the page
 
-- Hero with links to the App Store and Google Play
-- How it works: a scroll story with three tags (morning, car, night) and a phone that shows what each tap does
+- Hero with an interactive 3D scene: a phone taps an NFC tag and the routine shows up on its screen
+- How it works: a scroll story with three tags (morning, car, night) and a working phone mockup that shows what each tap does
 - Features
 - Shop: physical tags are coming soon
-- Footer with a QR code for each store
+- The app itself is coming soon to iOS and Android
 
 ## Tech
 
-React 18, TypeScript, Vite, Tailwind CSS and Framer Motion. The light and dark themes use CSS custom properties. A Three.js card for the hero is in the code but switched off for now.
+React 18, TypeScript, Vite, Tailwind CSS and Framer Motion. The hero scene is built with Three.js and React Three Fiber, loads lazily and falls back to a flat image without WebGL. The light and dark themes use CSS custom properties.
 
 ## Run locally
 
